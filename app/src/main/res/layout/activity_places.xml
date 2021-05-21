@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlacesActivity">
+    <ListView
+        android:id="@+id/placeList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+
+        android:divider="#FF6600"
+        android:dividerHeight="3dp"
+        android:scrollbarSize="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+   <RelativeLayout
+       android:id="@+id/buttonsContainer"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.100000024">
+
+       <ProgressBar
+           android:id="@+id/restaurantLoading"
+           android:layout_width="30dp"
+           android:layout_height="wrap_content"
+           android:layout_toLeftOf="@id/getRestaurant"
+           android:indeterminate="true" />
+       <Button
+           android:id="@+id/getRestaurant"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:text="getRestaurant" />
+
+       <ProgressBar
+           android:id="@+id/barLoading"
+           android:layout_width="30dp"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/getRestaurant"
+           android:layout_toLeftOf="@id/getBar"
+           android:indeterminate="true" />
+       <Button
+           android:id="@+id/getBar"
+           android:layout_below="@+id/getRestaurant"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:text="getBar" />
+
+       <ProgressBar
+           android:id="@+id/cafeLoading"
+           android:layout_width="30dp"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/getBar"
+           android:layout_toLeftOf="@id/getCafe"
+           android:indeterminate="true" />
+       <Button
+           android:id="@+id/getCafe"
+           android:layout_below="@+id/getBar"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:text="getCafe" />
+
+   </RelativeLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
