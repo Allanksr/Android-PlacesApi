@@ -120,6 +120,15 @@ class NearbyPlaceRepository(context: Context) {
 
                 }else{
                     Log.d(logTag, "no places to show: ")
+                    val array = JSONArray()
+                    val lat = "0"
+                    val lng = "0"
+                    array.put(lat)
+                    array.put(lng)
+                    array.put("increase the distance radius")
+                    array.put("undefined")
+                    array.put("undefined")
+                    jsonObjectToSend.put("singleValue", array)
                 }
             }
 
