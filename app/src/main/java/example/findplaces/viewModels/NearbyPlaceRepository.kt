@@ -47,70 +47,83 @@ class NearbyPlaceRepository(context: Context) {
 
             val jsonData: String = dataObject.toString()
             val objectData = JSONTokener(jsonData).nextValue() as JSONObject
-
-            if(objectData.has("next_page_token")){
-                preferenceProvider.setString(
-                    Const.pageToken,
-                    objectData.getString("next_page_token")
-                )
-                preferenceProvider.setString(Const.placeType, type)
+            jsonObjectToSend = JSONObject()
+            if(objectData.has("error_message")){
+                val array = JSONArray()
+                val lat = "0"
+                val lng = "0"
+                array.put(lat)
+                array.put(lng)
+                array.put(objectData.getString("error_message"))
+                array.put("undefined")
+                array.put("undefined")
+                jsonObjectToSend.put("singleValue", array)
             }else{
-                preferenceProvider.setString(Const.pageToken, "")
-            }
+                if(objectData.has("next_page_token")){
+                    preferenceProvider.setString(
+                        Const.pageToken,
+                        objectData.getString("next_page_token")
+                    )
+                    preferenceProvider.setString(Const.placeType, type)
+                }else{
+                    preferenceProvider.setString(Const.pageToken, "")
+                }
 
-            if(objectData.getString("results").length > 2){
-                val itemsComments = objectData.getString("results")
-                val jsonItems =  JSONArray(itemsComments)
-                jsonObjectToSend = JSONObject()
-                if(jsonItems.length()>1){
-                    for (i in 0 until jsonItems.length()) {
-                        val jsonObject = jsonItems.getJSONObject(i)
+                if(objectData.getString("results").length > 2){
+                    val itemsComments = objectData.getString("results")
+                    val jsonItems =  JSONArray(itemsComments)
+                    if(jsonItems.length()>1){
+                        for (i in 0 until jsonItems.length()) {
+                            val jsonObject = jsonItems.getJSONObject(i)
+                            val geometry: JSONObject = jsonObject.getJSONObject("geometry")
+                            val location: JSONObject = geometry.getJSONObject("location")
+                            val lat = location.getString("lat")
+                            val lng = location.getString("lng")
+                            jsonObjectToSend.accumulate("lat", lat)
+                            jsonObjectToSend.accumulate("lng", lng)
+                            jsonObjectToSend.accumulate("name", jsonObject.getString("name"))
+                            if(jsonObject.has("opening_hours")){
+                                val openNow: JSONObject = jsonObject.getJSONObject("opening_hours")
+                                jsonObjectToSend.accumulate("open_now", openNow.getString("open_now"))
+                            }else{
+                                jsonObjectToSend.accumulate("open_now", "undefined")
+                            }
+                            if(jsonObject.has("rating")){
+                                jsonObjectToSend.accumulate("rating", jsonObject.getString("rating"))
+                            }else{
+                                jsonObjectToSend.accumulate("rating", "undefined")
+                            }
+                        }
+                    }else{
+                        val array = JSONArray()
+                        val jsonObject = jsonItems.getJSONObject(0)
                         val geometry: JSONObject = jsonObject.getJSONObject("geometry")
                         val location: JSONObject = geometry.getJSONObject("location")
                         val lat = location.getString("lat")
                         val lng = location.getString("lng")
-                        jsonObjectToSend.accumulate("lat", lat)
-                        jsonObjectToSend.accumulate("lng", lng)
-                        jsonObjectToSend.accumulate("name", jsonObject.getString("name"))
+                        array.put(lat)
+                        array.put(lng)
+                        array.put(jsonObject.getString("name"))
                         if(jsonObject.has("opening_hours")){
                             val openNow: JSONObject = jsonObject.getJSONObject("opening_hours")
-                            jsonObjectToSend.accumulate("open_now", openNow.getString("open_now"))
+                            array.put(openNow.getString("open_now"))
                         }else{
-                            jsonObjectToSend.accumulate("open_now", "undefined")
+                            array.put("undefined")
                         }
                         if(jsonObject.has("rating")){
-                            jsonObjectToSend.accumulate("rating", jsonObject.getString("rating"))
+                            array.put(jsonObject.getString("rating"))
                         }else{
-                            jsonObjectToSend.accumulate("rating", "undefined")
+                            array.put("undefined")
                         }
+                        jsonObjectToSend.put("singleValue", array)
                     }
-                }else{
-                    val array = JSONArray()
-                    val jsonObject = jsonItems.getJSONObject(0)
-                    val geometry: JSONObject = jsonObject.getJSONObject("geometry")
-                    val location: JSONObject = geometry.getJSONObject("location")
-                    val lat = location.getString("lat")
-                    val lng = location.getString("lng")
-                    array.put(lat)
-                    array.put(lng)
-                    array.put(jsonObject.getString("name"))
-                    if(jsonObject.has("opening_hours")){
-                        val openNow: JSONObject = jsonObject.getJSONObject("opening_hours")
-                        array.put(openNow.getString("open_now"))
-                    }else{
-                        array.put("undefined")
-                    }
-                    if(jsonObject.has("rating")){
-                        array.put(jsonObject.getString("rating"))
-                    }else{
-                        array.put("undefined")
-                    }
-                    jsonObjectToSend.put("singleValue", array)
-                }
 
-            }else{
-                Log.d(logTag, "no places to show: ")
+                }else{
+                    Log.d(logTag, "no places to show: ")
+                }
             }
+
+
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         }catch (e: IOException) {
