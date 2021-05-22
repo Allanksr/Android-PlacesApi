@@ -16,7 +16,7 @@ import java.net.MalformedURLException
 import java.net.URL
 
 class NearbyPlaceRepository(context: Context) {
-    private var logTag = "logTag-MapsRepository"
+    private var logTag = "logTag-NearbyPlaceRepository"
     private var myContext = context
     private lateinit var connection: HttpURLConnection
     private var reader: BufferedReader? = null
