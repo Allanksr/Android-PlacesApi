@@ -21,11 +21,11 @@ class MainActivityViewModel: ViewModel() {
         return places
     }
 
-    fun getPlacesObject(latitude: Double, longitude: Double, proximityRadius: Int, type: String, key: String) {
+    fun getPlacesObject(latitude: Double, longitude: Double, type: String, key: String) {
         val retroInstance  = RetroInstance.getRetroInstance().create(RetroService::class.java)
         retroInstance.getPlacesFromApi(
                "${latitude},${longitude}",
-                proximityRadius,
+                "distance",
                 type,
                 key
             )

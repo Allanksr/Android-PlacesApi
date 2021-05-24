@@ -4,12 +4,12 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
+//rankby=distance
 interface RetroService {
     @GET("json")
     fun getPlacesFromApi(
         @Query("location") location: String?,
-        @Query("radius") radius: Int?,
+        @Query("rankby") rankby: String?,
         @Query("type") type: String?,
         @Query("key") key: String?
     ): Observable<PlacesModel>

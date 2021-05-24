@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
     private var locationCode = 10001
     var latitude: Double? =null
     var longitude: Double? =null
-    private val proximityRadius = 20000
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
+    lateinit var placeLocation : Location
     private lateinit var myLocation: Location
     private lateinit var resolutionForResult: ActivityResultLauncher<IntentSenderRequest>
     private lateinit var viewModel: MainActivityViewModel
@@ -88,10 +88,11 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     for (a in it.resultsArray.iterator()) {
-                        val placeLocation = Location(a.name)
+                        placeLocation = Location(a.name)
                         placeLocation.latitude = a.geometry?.location?.lat!!
                         placeLocation.longitude = a.geometry?.location?.lng!!
 
+                        Log.d(logTag, "${a.name}")
                         Log.d(logTag, "${placeLocation.latitude}")
                         Log.d(logTag, "${placeLocation.longitude}")
 
@@ -196,7 +197,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.getPlacesObject(
                 latitude!!,
                 longitude!!,
-                proximityRadius,
                 "restaurant",
                 apiKey
             )
@@ -208,7 +208,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.getPlacesObject(
                 latitude!!,
                 longitude!!,
-                proximityRadius,
                 "bar",
                 apiKey
             )
@@ -220,7 +219,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.getPlacesObject(
                 latitude!!,
                 longitude!!,
-                proximityRadius,
                 "cafe",
                 apiKey
             )

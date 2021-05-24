@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/retrofit_icon"
         android:label="@string/app_name"
