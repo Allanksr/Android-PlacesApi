@@ -1,4 +1,4 @@
-package example.findplaces
+package allanksr.com.retrofitconnection
 
 import org.junit.Test
 

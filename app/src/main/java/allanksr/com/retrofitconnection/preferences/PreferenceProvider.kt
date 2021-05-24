@@ -1,8 +1,7 @@
-package example.findplaces.preferences
+package allanksr.com.retrofitconnection.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
-
 
 class PreferenceProvider(context: Context){
     private val appContext = context
