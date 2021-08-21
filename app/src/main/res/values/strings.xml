@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Find Places</string>
+    <string name="get_restaurant">getRestaurant</string>
+    <string name="get_bar">getBar</string>
+    <string name="get_cafe">getCafe</string>
+    <string name="by_distance_or_radius">By distance or radius</string>
+    <string name="by_distance">By distance</string>
+    <string name="by_radius">By radius</string>
+    <string name="place_name">placeName</string>
+    <string name="open_trade">openTrade</string>
+    <string name="trade_assessment">tradeAssessment</string>
+    <string name="place_distance">placeDistance</string>
+    <string name="set_api_key">you define the api at file placesapikey.properties</string>
 </resources>

@@ -4,6 +4,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class PlacesModel(
+        var loading: Boolean = false,
+
         @SerializedName("next_page_token")
         @Expose
         var nextPageToken: String?,

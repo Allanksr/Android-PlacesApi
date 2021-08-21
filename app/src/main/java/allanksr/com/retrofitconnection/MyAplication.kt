@@ -2,9 +2,11 @@ package allanksr.com.retrofitconnection
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
 import androidx.multidex.MultiDex
+import dagger.hilt.android.HiltAndroidApp
 
-
+@HiltAndroidApp
 class MyApplication : Application(){
     companion object {
         lateinit var instance: MyApplication
@@ -17,10 +19,14 @@ class MyApplication : Application(){
         fix()
     }
 
-
     override fun onCreate() {
         super.onCreate()
         instance = this
+    }
+
+    fun isNetworkConnected(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null
     }
 
     private fun fix() {
@@ -40,7 +46,4 @@ class MyApplication : Application(){
         }
 
     }
-
-
-
 }

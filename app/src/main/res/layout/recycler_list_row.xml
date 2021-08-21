@@ -9,9 +9,9 @@
         android:id="@+id/placeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="placeName"
-        android:textColor="@color/black"
-        android:textSize="25dp"
+        android:text="@string/place_name"
+        android:textColor="@color/preto"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/placeName"
-        android:text="openTrade"
+        android:text="@string/open_trade"
         android:textColor="@android:color/holo_red_light"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -29,9 +29,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/openTrade"
-        android:text="tradeAssessment"
+        android:text="@string/trade_assessment"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -39,9 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tradeAssessment"
-        android:text="placeDistance"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:text="@string/place_distance"
+        android:textColor="@color/preto"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 
